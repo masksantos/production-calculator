@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Production Calculator</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="container">
+    <h1>Production Calculator</h1>
+    
+    <h2>Product</h2>
+    <label>
+      Select Product:
+      <select id="productSelect"></select>
+    </label>
+    <input type="text" id="newProductName" placeholder="New product name" />
+    <button type="button" id="addProductBtn">+ Add Product</button>
+    
+    <!-- Add Delete Product Button -->
+    <button type="button" id="deleteProductBtn">- Delete Product</button>
+
+    <form id="productionForm">
+      <div id="ingredientsContainer">
+        <h2>Ingredients</h2>
+      </div>
+      <button type="button" id="addIngredientBtn">+ Add Ingredient</button>
+      
+      <h2>Product Pricing</h2>
+      <label>Selling Price per Unit: <input type="number" id="sellingPrice" step="0.01" required /></label>
+      <label>Fixed Overhead Cost: <input type="number" id="fixedCost" step="0.01" required /></label>
+      
+      <button type="submit">Calculate</button>
+    </form>
+
+    <div id="output"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

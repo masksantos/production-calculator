@@ -1,0 +1,119 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #fff8f0;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1280px;
+  margin: auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+  color: #f78b00;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.ingredient {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+#ingredientsContainer {
+  margin-top: 20px;
+}
+
+.ingredient-header,
+.ingredient-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 80px; /* 7 columns: last for delete */
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.ingredient-header {
+  font-weight: bold;
+  background-color: #f4f4f4;
+  padding: 8px 0;
+}
+
+.ingredient-header div,
+.ingredient-row div {
+  padding: 4px;
+  text-align: center;
+}
+
+.ingredient-row input,
+.ingredient-row select {
+  width: 100%;
+  padding: 6px;
+  box-sizing: border-box;
+}
+
+.delete-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  width: 100%;
+}
+
+input, select {
+  padding: 8px;
+  font-size: 1em;
+  flex: 1;
+  min-width: 150px;
+}
+
+input:-webkit-autofill {
+    background-color: #fff !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+  
+button {
+  padding: 10px;
+  background-color: #f78b00;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+button:hover {
+  background-color: #d47400;
+}
+
+#output {
+  margin-top: 20px;
+  background: #f1f1f1;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.delete-btn {
+  background: #ff4d4d;
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.delete-btn:hover {
+  background: #d93636;
+}
