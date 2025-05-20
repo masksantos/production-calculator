@@ -26,9 +26,9 @@ A fixed overhead cost of **5000 applies** to the total production.
 ## Program usage (inputs, outputs)
 ### Inputs
 The program requires the following inputs to perform calculations:
+
 1. **Ingredient Quantities**: 
    - The total available quantities of each ingredient (e.g., mango, graham crackers, etc.) as specified in the ingredient list.
-  
 2. **Unit Costs**: 
    - The cost per unit for each ingredient (e.g., cost of mango per piece, cost of graham crackers per gram, etc.).
 3. **Quantity Requirements**: 
