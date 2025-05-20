@@ -86,7 +86,7 @@ To illustrate how the program works, here is a sample run based on the provided 
 
 ### Sample Output
 1. **Maximum Units Producible**:
-   - Based on the ingredient availability and requirements, the maximum number of units that can be produced is **7 units** (limited by the availability of mango).
+   - Based on the ingredient availability and requirements, the maximum number of units that can be produced is **5 units** (limited by the availability of graham crackers).
 2. **Unit Cost Calculation**:
    - Total ingredient cost per unit:
      - Mango: $4 \text{ pcs} \times 25 = 100$
@@ -99,19 +99,19 @@ To illustrate how the program works, here is a sample run based on the provided 
    100 + 180 + 50 + 180 + 180 = 690
    $$
 3. **Total Production Cost**:
-   - Total production cost for 7 units:
+   - Total production cost for 5 units:
    $$
-   \text{Total Production Cost} = (690 \text{ per unit} \times 7 \text{ units}) + 5000 = 4830 + 5000 = 9830
+   \text{Total Production Cost} = (690 \text{ per unit} \times 5 \text{ units}) + 5000 = 3450 + 5000 = 8450
    $$
 4. **Total Revenue**:
-   - Total revenue from selling 7 units:
+   - Total revenue from selling 5 units:
    $$
-   \text{Total Revenue} = 950 \text{ per unit} \times 7 \text{ units} = 6650
+   \text{Total Revenue} = 950 \text{ per unit} \times 5 \text{ units} = 4750
    $$
 5. **Total Profit**:
    - Total profit earned:
    $$
-   \text{Total Profit} = \text{Total Revenue} - \text{Total Production Cost} = 6650 - 9830 = -3180
+   \text{Total Profit} = \text{Total Revenue} - \text{Total Production Cost} = 4750 - 8450 = -3700
    $$
 6. **Break-even Analysis**:
    - Break-even units required:
@@ -121,6 +121,29 @@ To illustrate how the program works, here is a sample run based on the provided 
 
 ### Summary
 
-In this sample run, the program calculates that you can produce a maximum of 7 units, but due to the high production costs relative to the selling price, you would incur a loss of 3180. Additionally, you would need to sell approximately 20 units to break even.
+In this sample run, the program calculates that you can produce a maximum of 5 units, limited by the availability of graham crackers. At this production level, due to the high production costs relative to the selling price, you would incur a loss of 3700 Php. Additionally, you would need to sell approximately 20 units to break even.
+
+This calculation demonstrates how the calculator can help you assess production feasibility and profitability based on ingredient availability and costs.
+
+## Optimal Solution
+* x = 5 (Produce 5 units of Mango Graham Float)
+* s1 = 10 (10 mangoes remain unused)
+* s2 = 0 (All graham crackers are used - binding constraint)
+* s3 = 250 (250g of crushed graham remains unused)
+* s4 = 3000 (3000ml of all purpose cream remains unused)
+* s5 = 1500 (1500ml of condensed milk remains unused)
+
+## Verification:
+We can verify that this solution satisfies all constraints:
+* Mango: 4 × 5 = 20 ≤ 30 ✓
+* Graham Crackers: 200 × 5 = 1000 ≤ 1000 ✓ (Binding)
+* Crushed Graham: 50 × 5 = 250 ≤ 500 ✓
+* All Purpose Cream: 400 × 5 = 2000 ≤ 5000 ✓
+* Condensed Milk: 300 × 5 = 1500 ≤ 3000 ✓
+
+## Discussion of results
+The application of the Simplex Method reveals that the maximum production capacity for Mango Graham Float is 5 units. The binding constraint in this scenario is the availability of Graham Crackers, which limits the production despite the surplus availability of other ingredients.
+
+This result confirms that the Simplex Method is effective for this single-product optimization problem. The calculations highlight the importance of inventory management, particularly for critical ingredients that can become binding constraints in production scenarios.
 
 This example demonstrates how the calculator can help you assess production feasibility and profitability based on ingredient availability and costs.
