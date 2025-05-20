@@ -191,8 +191,12 @@ function handleSubmit(e) {
   const sellingPrice = parseFloat(document.getElementById("sellingPrice").value);
   const fixedCost = parseFloat(document.getElementById("fixedCost").value);
 
-  if (sellingPrice <= 0 || fixedCost < 0) {
-    alert("Enter valid selling price and fixed cost.");
+  if (sellingPrice === 0) {
+    alert("❌ Selling price cannot be zero. Please enter a valid amount.");
+    return;
+  }
+  if (sellingPrice < 0 || fixedCost < 0) {
+    alert("❌ Selling price and fixed cost must not be negative.");
     return;
   }
 
