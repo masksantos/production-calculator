@@ -1,3 +1,6 @@
+// ==== MAIN DATA STRUCTURE ==== //
+
+// Defining the product
 let products = {
   "Mango Graham Float": {
     ingredients: [
@@ -15,15 +18,17 @@ let products = {
 let currentProduct = "Mango Graham Float";
 const units = ["g", "kg", "ml", "L", "tsp", "tbsp", "cup", "fl oz", "pc(s)", "pack(s)"];
 
+// ==== INITIALIZATION ==== //
 function init() {
   document.getElementById("addIngredientBtn").addEventListener("click", addIngredient);
   document.getElementById("addProductBtn").addEventListener("click", addProduct);
-  document.getElementById("deleteProductBtn").addEventListener("click", deleteProduct);  // Add delete product event
+  document.getElementById("deleteProductBtn").addEventListener("click", deleteProduct);
   document.getElementById("productSelect").addEventListener("change", loadProduct);
   document.getElementById("productionForm").addEventListener("submit", handleSubmit);
   initProductSelector();
 }
 
+// Populate the product dropdown
 function initProductSelector() {
   const select = document.getElementById("productSelect");
   select.innerHTML = Object.keys(products)
@@ -33,34 +38,31 @@ function initProductSelector() {
   loadProduct();
 }
 
+// ==== PRODUCT OPERATIONS ==== //
+
+// Add a new product
 function addProduct() {
   const name = document.getElementById("newProductName").value.trim();
   if (!name) return alert("Product name cannot be empty.");
   if (products[name]) return alert("Product already exists.");
-  products[name] = {
-    ingredients: [],
-    sellingPrice: 0,
-    fixedCost: 0
-  };
+  products[name] = { ingredients: [], sellingPrice: 0, fixedCost: 0 };
   currentProduct = name;
   document.getElementById("newProductName").value = "";
   initProductSelector();
 }
 
+// Delete the current product
 function deleteProduct() {
   const confirmation = confirm(`Are you sure you want to delete the product "${currentProduct}"? This action cannot be undone.`);
   if (confirmation) {
-    delete products[currentProduct];  // Remove the product from the products object
-    if (Object.keys(products).length > 0) {
-      currentProduct = Object.keys(products)[0];  // Set the current product to the first product in the list
-    } else {
-      currentProduct = "";  // No products left
-    }
+    delete products[currentProduct];
+    currentProduct = Object.keys(products)[0] || "";
     initProductSelector();
     loadProduct();
   }
 }
 
+// Load product data and ingredients into the form
 function loadProduct() {
   const select = document.getElementById("productSelect");
   currentProduct = select.value;
@@ -88,6 +90,9 @@ function loadProduct() {
   document.getElementById("fixedCost").value = products[currentProduct].fixedCost || "";
 }
 
+// ==== INGREDIENT OPERATIONS ==== //
+
+// Create an editable row for an ingredient
 function createIngredientRow(ing = {}) {
   const div = document.createElement("div");
   div.className = "ingredient-row";
@@ -114,18 +119,21 @@ function createIngredientRow(ing = {}) {
   return div;
 }
 
+// Populate unit dropdown with selected unit
 function createUnitDropdown(selectedUnit) {
   return units
     .map(unit => `<option value="${unit}" ${unit === selectedUnit ? 'selected' : ''}>${unit}</option>`)
     .join('');
 }
 
+// Add a blank ingredient row
 function addIngredient() {
   const container = document.getElementById("ingredientsContainer");
   const div = createIngredientRow();
   container.appendChild(div);
 }
 
+// ==== FORM SUBMISSION & CALCULATIONS ==== //
 function handleSubmit(e) {
   e.preventDefault();
 
@@ -136,6 +144,7 @@ function handleSubmit(e) {
   let scarceResources = [];
   let adequateResources = [];
 
+  // Collect and validate ingredient data
   for (let div of ingredientDivs) {
     const [name, available, unit, cost, recipe, recipeUnit] = div.querySelectorAll("input, select");
 
@@ -153,6 +162,7 @@ function handleSubmit(e) {
 
       const availableQuantity = parseFloat(available.value);
       const recipeQuantity = parseFloat(recipe.value);
+
       if (availableQuantity >= recipeQuantity) {
         adequateResources.push(name.value);
       } else if (availableQuantity < recipeQuantity && availableQuantity > 0) {
@@ -161,11 +171,13 @@ function handleSubmit(e) {
     }
   }
 
+  // Handle invalid inputs
   if (hasZeroOrNegativeInput) {
     alert("❌ There is a 0 or negative input. Please check all fields and enter valid positive values.");
     return;
   }
 
+	// Warn about scarce or adequate resources
   if (scarceResources.length > 0) {
     alert("⚠️ Warning: The following resources are SCARCE:\n" + scarceResources.join(", "));
     return;
@@ -175,34 +187,38 @@ function handleSubmit(e) {
     alert("✅ Note: The following resources are ADEQUATE:\n" + adequateResources.join(", "));
   }
 
+  // Validate selling price and fixed cost
   const sellingPrice = parseFloat(document.getElementById("sellingPrice").value);
   const fixedCost = parseFloat(document.getElementById("fixedCost").value);
 
-  if (sellingPrice <= 0 || fixedCost < 0) {
+  if (sellingPrice < 0 || fixedCost < 0) {
     alert("Enter valid selling price and fixed cost.");
     return;
   }
 
+  // Save data to current product
   products[currentProduct].ingredients = ingredients;
   products[currentProduct].sellingPrice = sellingPrice;
   products[currentProduct].fixedCost = fixedCost;
 
+  // ==== CALCULATIONS ==== //
+
+  // Calculate maximum number of units that can be produced
   let maxUnits = Infinity;
   for (let ing of ingredients) {
     const maxForThisIngredient = Math.floor(ing.available / ing.recipe);
     maxUnits = Math.min(maxUnits, maxForThisIngredient);
   }
+  if (maxUnits === Infinity) maxUnits = 0;
 
-  if (maxUnits === Infinity) {
-    maxUnits = 0;
-  }
-
+  // Calculate total and unit cost computation
   let totalCost = 0;
   for (let ing of ingredients) {
     const used = ing.recipe * maxUnits;
     totalCost += used * ing.cost;
   }
-
+		
+		// Calculate per unit cost, revenue, profit, break-even
   const unitCost = maxUnits > 0 ? totalCost / maxUnits : 0;
   const revenue = sellingPrice * maxUnits;
   const profit = revenue - totalCost;
@@ -210,6 +226,7 @@ function handleSubmit(e) {
     ? Math.ceil(fixedCost / (sellingPrice - unitCost))
     : "Not achievable";
 
+  // Display result summary
   const ingredientSummary = ingredients.map(ing => {
     const used = ing.recipe * maxUnits;
     return `<li><strong>${ing.name}</strong>: ${used} ${ing.recipeUnit} used, @ ₱${ing.cost.toFixed(2)}/unit</li>`;
@@ -227,4 +244,5 @@ function handleSubmit(e) {
   `;
 }
 
+// Run init after the DOM has loaded
 window.addEventListener("DOMContentLoaded", init);
