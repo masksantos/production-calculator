@@ -191,7 +191,7 @@ function handleSubmit(e) {
   const sellingPrice = parseFloat(document.getElementById("sellingPrice").value);
   const fixedCost = parseFloat(document.getElementById("fixedCost").value);
 
-  if (sellingPrice < 0 || fixedCost < 0) {
+  if (sellingPrice < 0 && fixedCost < 0) {
     alert("Enter valid selling price and fixed cost.");
     return;
   }
