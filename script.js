@@ -188,17 +188,20 @@ function handleSubmit(e) {
   }
 
   // Validate selling price and fixed cost
-  const sellingPrice = parseFloat(document.getElementById("sellingPrice").value);
-  const fixedCost = parseFloat(document.getElementById("fixedCost").value);
+  const sellingPriceInput = document.getElementById("sellingPrice").value;
+	 const fixedCostInput = document.getElementById("fixedCost").value;
 
-  if (sellingPrice === 0) {
-    alert("❌ Selling price cannot be zero. Please enter a valid amount.");
-    return;
-  }
-  if (sellingPrice < 0 || fixedCost < 0) {
-    alert("❌ Selling price and fixed cost must not be negative.");
-    return;
-  }
+		const sellingPrice = parseFloat(sellingPriceInput);
+		const fixedCost = parseFloat(fixedCostInput);
+
+		if (isNaN(sellingPrice) || sellingPrice <= 0) {
+  alert("❌ Selling price must be a number greater than zero.");
+  return;
+		}
+		if (isNaN(fixedCost) || fixedCost < 0) {
+  alert("❌ Fixed cost must be a number zero or greater.");
+  return;
+		}
 
   // Save data to current product
   products[currentProduct].ingredients = ingredients;
