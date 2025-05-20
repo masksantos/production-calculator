@@ -189,19 +189,19 @@ function handleSubmit(e) {
 
   // Validate selling price and fixed cost
   const sellingPriceInput = document.getElementById("sellingPrice").value;
-	 const fixedCostInput = document.getElementById("fixedCost").value;
+  const fixedCostInput = document.getElementById("fixedCost").value;
 
-		const sellingPrice = parseFloat(sellingPriceInput);
-		const fixedCost = parseFloat(fixedCostInput);
+  const sellingPrice = parseFloat(sellingPriceInput);
+  const fixedCost = parseFloat(fixedCostInput);
 
-		if (isNaN(sellingPrice) || sellingPrice <= 0) {
+  if (isNaN(sellingPrice) || sellingPrice <= 0) {
   alert("❌ Selling price must be a number greater than zero.");
   return;
-		}
-		if (isNaN(fixedCost) || fixedCost < 0) {
+  }
+  if (isNaN(fixedCost) || fixedCost < 0) {
   alert("❌ Fixed cost must be a number zero or greater.");
   return;
-		}
+  }
 
   // Save data to current product
   products[currentProduct].ingredients = ingredients;
