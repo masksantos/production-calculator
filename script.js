@@ -177,7 +177,7 @@ function handleSubmit(e) {
     return;
   }
 
-	// Warn about scarce or adequate resources
+  // Warn about scarce or adequate resources
   if (scarceResources.length > 0) {
     alert("⚠️ Warning: The following resources are SCARCE:\n" + scarceResources.join(", "));
     return;
@@ -191,7 +191,7 @@ function handleSubmit(e) {
   const sellingPrice = parseFloat(document.getElementById("sellingPrice").value);
   const fixedCost = parseFloat(document.getElementById("fixedCost").value);
 
-  if (sellingPrice <= 0 && fixedCost < 0) {
+  if (sellingPrice <= 0 || fixedCost < 0) {
     alert("Enter valid selling price and fixed cost.");
     return;
   }
@@ -218,7 +218,7 @@ function handleSubmit(e) {
     totalCost += used * ing.cost;
   }
 		
-		// Calculate per unit cost, revenue, profit, break-even
+  // Calculate per unit cost, revenue, profit, break-even
   const unitCost = maxUnits > 0 ? totalCost / maxUnits : 0;
   const revenue = sellingPrice * maxUnits;
   const profit = revenue - totalCost;
