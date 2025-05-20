@@ -1,3 +1,4 @@
+/* ----------------- Base Styling ----------------- */
 body {
   font-family: Arial, sans-serif;
   background: #fff8f0;
@@ -18,19 +19,27 @@ h1, h2 {
   color: #f78b00;
 }
 
+/* ----------------- Form Layout ----------------- */
 form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.ingredient {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
+input, select {
+  padding: 8px;
+  font-size: 1em;
+  flex: 1;
+  min-width: 150px;
+  box-sizing: border-box;
 }
 
+input:-webkit-autofill {
+  background-color: #fff !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ----------------- Ingredients Section ----------------- */
 #ingredientsContainer {
   margin-top: 20px;
 }
@@ -38,7 +47,7 @@ form {
 .ingredient-header,
 .ingredient-row {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 80px; /* 7 columns: last for delete */
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 80px;
   gap: 10px;
   align-items: center;
   margin-bottom: 10px;
@@ -60,30 +69,16 @@ form {
 .ingredient-row select {
   width: 100%;
   padding: 6px;
-  box-sizing: border-box;
 }
 
-.delete-btn {
-  background-color: red;
-  color: white;
-  border: none;
-  cursor: pointer;
-  padding: 6px;
-  width: 100%;
+.ingredient {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
 }
 
-input, select {
-  padding: 8px;
-  font-size: 1em;
-  flex: 1;
-  min-width: 150px;
-}
-
-input:-webkit-autofill {
-    background-color: #fff !important;
-    transition: background-color 5000s ease-in-out 0s;
-  }
-  
+/* ----------------- Buttons ----------------- */
 button {
   padding: 10px;
   background-color: #f78b00;
@@ -95,13 +90,6 @@ button {
 
 button:hover {
   background-color: #d47400;
-}
-
-#output {
-  margin-top: 20px;
-  background: #f1f1f1;
-  padding: 15px;
-  border-radius: 8px;
 }
 
 .delete-btn {
@@ -116,4 +104,12 @@ button:hover {
 
 .delete-btn:hover {
   background: #d93636;
+}
+
+/* ----------------- Output Section ----------------- */
+#output {
+  margin-top: 20px;
+  background: #f1f1f1;
+  padding: 15px;
+  border-radius: 8px;
 }
